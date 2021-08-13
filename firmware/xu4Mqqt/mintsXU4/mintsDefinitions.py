@@ -45,6 +45,12 @@ def findOzonePort():
             ozonePort.append(str(p[0]).split(" ")[0])
     return ozonePort
 
+def findAirMarPort():
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        currentPort = str(p[2])
+        if(currentPort.find("PID=067B")>=0):
+            return(p[0])
 
 def findMacAddress():
     macAddress= get_mac_address(interface="eth0")
@@ -71,7 +77,7 @@ dataFolderReference       = "/home/teamlary/mintsData/reference"
 dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"
 dataFolder                = "/home/teamlary/mintsData/raw"
 dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
-
+airMarPort            = findAirMarPort()
 duePort               = findDuePort()
 nanoPorts             = findNanoPorts()
 ozonePort             = findOzonePort()
@@ -96,15 +102,14 @@ if __name__ == "__main__":
     print("Mac Address          : {0}".format(macAddress))
     print("Data Folder Reference: {0}".format(dataFolderReference))
     print("Data Folder Raw      : {0}".format(dataFolder))
-    print("Due Port             : {0}".format(duePort))
-    print("Ozone Port           : {0}".format(ozonePort))
     print("GPS Port             : {0}".format(gpsPort))
-    print("Show2 Port           : {0}".format(show2Port))
+    print("airmar Port          : {0}".format(airMarPort))
     print("Latest On            : {0}".format(latestDisplayOn))
     print("Latest On                  : {0}".format(latestOn))
     print("MQTT On                    : {0}".format(mqttOn))
     print("MQTT Credentials File      : {0}".format(mqttCredentialsFile))
     print("MQTT Broker and Port       : {0}, {1}".format(mqttOn,mqttPort))
+    
 
     #-------------------------------------------#
     print("Nano Ports :")

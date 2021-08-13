@@ -1,8 +1,8 @@
 
 import serial
 import datetime
-from mintsC1Plus import mintsSensorReader as mSR
-from mintsC1Plus import mintsDefinitions as mD
+from mintsXU4 import mintsSensorReader as mSR
+from mintsXU4 import mintsDefinitions as mD
 import time
 import serial
 from collections import OrderedDict
